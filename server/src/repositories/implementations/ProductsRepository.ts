@@ -34,4 +34,8 @@ export default class ProductsRepository implements IProductsRepository {
   public async delete(barcode: string): Promise<void> {
     await this.ormRepository.delete({ barcode });
   }
+
+  public async list(): Promise<Product[]> {
+    return this.ormRepository.find();
+  }
 }

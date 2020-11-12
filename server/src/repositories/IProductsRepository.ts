@@ -11,4 +11,6 @@ export default interface IProductsRepository {
   save(product: Product): Promise<Product>;
 
   delete(barcode: string): Promise<void>;
+
+  list(): Promise<Product[]>;
 }

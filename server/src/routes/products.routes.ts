@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateProductService from '../services/CreateProductService';
 import DeleteProductService from '../services/DeleteProductService';
+import ListProductsService from '../services/ListProductsService';
 import UpdateProductService from '../services/UpdateProductService';
 
 const productRouter = Router();
@@ -45,5 +46,13 @@ productRouter.delete(
     response.json();
   },
 );
+
+productRouter.get('/', async (request: Request, response: Response) => {
+  const listProducts = container.resolve(ListProductsService);
+
+  const products = await listProducts.execute();
+
+  response.json(products);
+});
 
 export default productRouter;
