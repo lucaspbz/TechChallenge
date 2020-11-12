@@ -11,12 +11,20 @@ export default class ProductsRepository implements IProductsRepository {
     this.ormRepository = getRepository(Product);
   }
 
+  public async findByBarcode(barcode: string): Promise<Product | undefined> {
+    return this.ormRepository.findOne({ where: { barcode } });
+  }
+
   public async create(data: ICreateProductDTO): Promise<Product> {
     const product = this.ormRepository.create(data);
 
     await this.ormRepository.save(product);
 
     return product;
+  }
+
+  public async save(product: Product): Promise<Product> {
+    return this.ormRepository.save(product);
   }
 
   public async findByName(name: string): Promise<Product | undefined> {
