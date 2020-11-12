@@ -9,4 +9,6 @@ export default interface IProductsRepository {
   create(data: ICreateProductDTO): Promise<Product>;
 
   save(product: Product): Promise<Product>;
+
+  delete(barcode: string): Promise<void>;
 }

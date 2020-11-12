@@ -1,6 +1,8 @@
 import { Request, Response, Router } from 'express';
 import { container } from 'tsyringe';
+
 import CreateProductService from '../services/CreateProductService';
+import DeleteProductService from '../services/DeleteProductService';
 import UpdateProductService from '../services/UpdateProductService';
 
 const productRouter = Router();
@@ -30,5 +32,18 @@ productRouter.put('/:barcode', async (request: Request, response: Response) => {
 
   response.json(product);
 });
+
+productRouter.delete(
+  '/:barcode',
+  async (request: Request, response: Response) => {
+    const { barcode } = request.params;
+
+    const deleteProduct = container.resolve(DeleteProductService);
+
+    await deleteProduct.execute(barcode);
+
+    response.json();
+  },
+);
 
 export default productRouter;
