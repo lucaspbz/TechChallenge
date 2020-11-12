@@ -6,6 +6,8 @@ export default interface IProductsRepository {
 
   findByBarcode(barcode: string): Promise<Product | undefined>;
 
+  findLowStock(minValue: number): Promise<Product[]>;
+
   create(data: ICreateProductDTO): Promise<Product>;
 
   save(product: Product): Promise<Product>;

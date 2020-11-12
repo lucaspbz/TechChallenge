@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, LessThan } from 'typeorm';
 import ICreateProductDTO from '../../dtos/ICreateProductDTO';
 
 import Product from '../../models/Product';
@@ -9,6 +9,12 @@ export default class ProductsRepository implements IProductsRepository {
 
   constructor() {
     this.ormRepository = getRepository(Product);
+  }
+
+  public async findLowStock(minValue: number): Promise<Product[]> {
+    return this.ormRepository.find({
+      where: { quantity: LessThan(minValue) },
+    });
   }
 
   public async findByBarcode(barcode: string): Promise<Product | undefined> {
