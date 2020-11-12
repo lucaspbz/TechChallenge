@@ -2,15 +2,16 @@ import express from 'express';
 import cors from 'cors';
 
 import './database';
+import './container';
+
+import routes from './routes';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (request, response) => {
-  response.json({ message: 'Hello world' });
-});
+app.use(routes);
 
 const port = 3333;
 
