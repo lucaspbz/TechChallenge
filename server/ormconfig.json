@@ -1,0 +1,14 @@
+{
+  "type": "sqlite",
+  "host": "localhost",
+  "database": "./src/database/my_store",
+  "entities": [
+    "src/models/*.ts"
+  ],
+  "migrations": [
+    "src/database/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "src/database/migrations"
+  }
+}
