@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es6": true,
+    "jest": true
   },
   "extends": [
     "plugin:react/recommended",
@@ -10,23 +11,32 @@
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 12,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
   "plugins": [
     "react",
-    "@typescript-eslint",
     "react-hooks",
+    "@typescript-eslint",
     "prettier"
   ],
   "rules": {
+    "prettier/prettier": "error",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "no-unused-expressions": "off",
     "react/jsx-filename-extension": [
       1,
       {
@@ -36,8 +46,20 @@
       }
     ],
     "import/prefer-default-export": "off",
-    "camelcase": "off",
-    "@typescript-eslint/ban-types": "off",
+    "import/no-duplicates": "off",
+    "@typescript-eslint/interface-name-prefix": [
+      "error",
+      {
+        "prefixWithI": "always"
+      }
+    ],
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
     "no-use-before-define": "off",
     "import/extensions": [
       "error",
@@ -47,7 +69,8 @@
         "tsx": "never"
       }
     ],
-    "prettier/prettier": "error"
+    "camelcase": "off",
+    "react/jsx-indent": "off"
   },
   "settings": {
     "import/resolver": {
