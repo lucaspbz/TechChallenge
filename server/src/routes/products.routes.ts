@@ -1,58 +1,16 @@
-import { Request, Response, Router } from 'express';
-import { container } from 'tsyringe';
-
-import CreateProductService from '../services/CreateProductService';
-import DeleteProductService from '../services/DeleteProductService';
-import ListProductsService from '../services/ListProductsService';
-import UpdateProductService from '../services/UpdateProductService';
+import { Router } from 'express';
+import ProductsController from '../controllers/ProductsController';
 
 const productRouter = Router();
 
-productRouter.post('/', async (request: Request, response: Response) => {
-  const { name, quantity, price } = request.body;
+const productsController = new ProductsController();
 
-  const createProduct = container.resolve(CreateProductService);
+productRouter.post('/', productsController.create);
 
-  const product = await createProduct.execute({ name, quantity, price });
+productRouter.put('/:barcode', productsController.update);
 
-  response.json(product);
-});
+productRouter.delete('/:barcode', productsController.destroy);
 
-productRouter.put('/:barcode', async (request: Request, response: Response) => {
-  const { barcode } = request.params;
-  const { name, quantity, price } = request.body;
-
-  const updateProduct = container.resolve(UpdateProductService);
-
-  const product = await updateProduct.execute({
-    barcode,
-    name,
-    quantity,
-    price,
-  });
-
-  response.json(product);
-});
-
-productRouter.delete(
-  '/:barcode',
-  async (request: Request, response: Response) => {
-    const { barcode } = request.params;
-
-    const deleteProduct = container.resolve(DeleteProductService);
-
-    await deleteProduct.execute(barcode);
-
-    response.json();
-  },
-);
-
-productRouter.get('/', async (request: Request, response: Response) => {
-  const listProducts = container.resolve(ListProductsService);
-
-  const products = await listProducts.execute();
-
-  response.json(products);
-});
+productRouter.get('/', productsController.index);
 
 export default productRouter;
