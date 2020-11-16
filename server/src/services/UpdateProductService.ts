@@ -29,6 +29,12 @@ export default class UpdateProductService {
       throw new AppError('There is no product with this barcode');
     }
 
+    const repeatedName = await this.productsRepository.findByName(data.name);
+
+    if (repeatedName) {
+      throw new AppError('There is already a product with this name');
+    }
+
     Object.assign(productExists, { ...data });
 
     await this.productsRepository.save(productExists);

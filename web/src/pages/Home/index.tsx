@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import CriticalStock from '../../components/CriticalStock';
 import Modal from '../../components/Modal';
 
 import Table from '../../components/Table';
@@ -6,7 +7,7 @@ import api from '../../services/api';
 
 import { Container } from './styles';
 
-interface IDataType {
+export interface IDataType {
   barcode: string;
   name: string;
   price: number;
@@ -88,6 +89,7 @@ const Home: React.FC = () => {
         <button type="button" onClick={handleOpenModalCreateMode}>
           + Novo produto
         </button>
+
         <Table
           columns={[
             {
@@ -110,6 +112,11 @@ const Home: React.FC = () => {
           ]}
           name="Tabela de teste"
           data={data}
+          onEditButtonClick={onEditButtonClick}
+        />
+
+        <CriticalStock
+          data={data.filter(product => product.quantity < 100)}
           onEditButtonClick={onEditButtonClick}
         />
       </main>

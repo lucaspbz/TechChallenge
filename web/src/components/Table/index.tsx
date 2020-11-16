@@ -53,7 +53,7 @@ export default function Table<T extends object>(
         </thead>
 
         <tbody {...getTableBodyProps()}>
-          {page.map((row, i) => {
+          {page.map(row => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
