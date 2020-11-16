@@ -30,7 +30,7 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": "warn",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
@@ -47,15 +47,9 @@
     ],
     "import/prefer-default-export": "off",
     "import/no-duplicates": "off",
-    "@typescript-eslint/interface-name-prefix": [
-      "error",
-      {
-        "prefixWithI": "always"
-      }
-    ],
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/explicit-function-return-type": [
-      "error",
+      "warn",
       {
         "allowExpressions": true
       }
@@ -70,7 +64,9 @@
       }
     ],
     "camelcase": "off",
-    "react/jsx-indent": "off"
+    "react/jsx-indent": "off",
+    "no-nested-ternary": "off",
+    "@typescript-eslint/ban-types": "off"
   },
   "settings": {
     "import/resolver": {
